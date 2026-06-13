@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.MathSafari" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">#000510</item>
+    </style>
+</resources>
