@@ -1,4 +1,4 @@
-package com.mathheroes.safari.data
+package com.solarsystem.explorers.data
 
 import android.content.Context
 import androidx.datastore.core.DataStore

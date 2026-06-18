@@ -1,4 +1,4 @@
-package com.mathheroes.safari
+package com.solarsystem.explorers
 
 import android.os.Bundle
 import android.webkit.WebView
@@ -15,9 +15,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.mathheroes.safari.data.DataStoreManager
-import com.mathheroes.safari.data.PlanetRepository
-import com.mathheroes.safari.ui.*
+import com.solarsystem.explorers.data.DataStoreManager
+import com.solarsystem.explorers.data.PlanetRepository
+import com.solarsystem.explorers.ui.*
 
 class MainActivity : ComponentActivity() {
 

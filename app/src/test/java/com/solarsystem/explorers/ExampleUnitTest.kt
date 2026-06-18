@@ -1,4 +1,4 @@
-package com.mathheroes.safari
+package com.solarsystem.explorers
 
 import org.junit.Test
 

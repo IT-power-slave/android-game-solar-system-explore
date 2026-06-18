@@ -1,4 +1,4 @@
-package com.mathheroes.safari.data
+package com.solarsystem.explorers.data
 
 object PlanetRepository {
     val planets = listOf(

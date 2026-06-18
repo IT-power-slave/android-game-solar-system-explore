@@ -1,4 +1,4 @@
-package com.mathheroes.safari.data
+package com.solarsystem.explorers.data
 
 data class Planet(
     val id: String,

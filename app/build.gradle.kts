@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.mathheroes.safari"
+    namespace = "com.solarsystem.explorers"
     compileSdk {
         version = release(36) {
             minorApiLevel = 1
@@ -12,7 +12,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.mathheroes.safari"
+        applicationId = "com.solarsystem.explorers"
         minSdk = 30
         targetSdk = 35
         versionCode = 1

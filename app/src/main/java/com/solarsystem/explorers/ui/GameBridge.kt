@@ -1,4 +1,4 @@
-package com.mathheroes.safari.ui
+package com.solarsystem.explorers.ui
 
 import android.webkit.JavascriptInterface
 

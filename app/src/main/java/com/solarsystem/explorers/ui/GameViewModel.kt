@@ -1,8 +1,8 @@
-package com.mathheroes.safari.ui
+package com.solarsystem.explorers.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mathheroes.safari.data.*
+import com.solarsystem.explorers.data.*
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 

@@ -1,8 +1,8 @@
-# Privacy Policy for Math Heroes: Solar Safari
+# Privacy Policy for Solar System Explorers
 
 **Last Updated: June 18, 2026**
 
-Math Heroes: Solar Safari ("we", "our", or "the App") is committed to protecting the privacy of our users, especially children. This Privacy Policy explains our data practices.
+Solar System Explorers ("we", "our", or "the App") is committed to protecting the privacy of our users, especially children. This Privacy Policy explains our data practices.
 
 ## 1. Data Collection
 We do **not** collect any Personal Identifiable Information (PII) such as names, email addresses, or phone numbers. 

@@ -1,4 +1,4 @@
-package com.mathheroes.safari.ui
+package com.solarsystem.explorers.ui
 
 import androidx.compose.animation.*
 import androidx.compose.foundation.BorderStroke
@@ -27,11 +27,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.mathheroes.safari.data.Badge
-import com.mathheroes.safari.data.Planet
-import com.mathheroes.safari.data.PlanetRepository
-import com.mathheroes.safari.data.Question
-import com.mathheroes.safari.R
+import com.solarsystem.explorers.data.Badge
+import com.solarsystem.explorers.data.Planet
+import com.solarsystem.explorers.data.PlanetRepository
+import com.solarsystem.explorers.data.Question
+import com.solarsystem.explorers.R
 
 @Composable
 fun HUDView(

@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Math Heroes: Solar Safari</string>
+    <string name="app_name">Solar System Explorers</string>
     <string name="loading">Loading&#8230;</string>
-    <string name="menu_title">🚀 Solar Heroes\nExploration</string>
+    <string name="menu_title">🚀 Solar System\nExplorers</string>
     <string name="menu_subtitle">Explore the planets and become a Master of Space!</string>
     <string name="start_explore">🔭 Explore System</string>
     <string name="start_quiz">🎮 Planetary Quiz</string>
