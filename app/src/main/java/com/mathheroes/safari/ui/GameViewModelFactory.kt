@@ -1,8 +1,8 @@
-package com.example.mathsafari.ui
+package com.mathheroes.safari.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.mathsafari.data.DataStoreManager
+import com.mathheroes.safari.data.DataStoreManager
 
 class GameViewModelFactory(private val dataStoreManager: DataStoreManager) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

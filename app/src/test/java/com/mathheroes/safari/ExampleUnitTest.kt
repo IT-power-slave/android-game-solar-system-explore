@@ -1,4 +1,4 @@
-package com.example.mathsafari
+package com.mathheroes.safari
 
 import org.junit.Test
 

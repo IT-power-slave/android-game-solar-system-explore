@@ -1,4 +1,4 @@
-package com.example.mathsafari
+package com.mathheroes.safari
 
 import android.os.Bundle
 import android.webkit.WebView
@@ -15,9 +15,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.mathsafari.data.DataStoreManager
-import com.example.mathsafari.data.PlanetRepository
-import com.example.mathsafari.ui.*
+import com.mathheroes.safari.data.DataStoreManager
+import com.mathheroes.safari.data.PlanetRepository
+import com.mathheroes.safari.ui.*
 
 class MainActivity : ComponentActivity() {
 
@@ -80,7 +80,7 @@ class MainActivity : ComponentActivity() {
                                     )
                                     Spacer(Modifier.height(16.dp))
                                     Text(
-                                        text = "Ładuję...",
+                                        text = getString(R.string.loading),
                                         color = Color(0xFFB4DCFF),
                                         fontSize = 20.sp,
                                         fontWeight = FontWeight.Bold

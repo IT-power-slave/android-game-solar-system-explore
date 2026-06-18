@@ -1,4 +1,4 @@
-package com.example.mathsafari.data
+package com.mathheroes.safari.data
 
 import android.content.Context
 import androidx.datastore.core.DataStore

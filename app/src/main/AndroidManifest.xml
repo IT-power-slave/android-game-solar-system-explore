@@ -10,9 +10,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MathSafari">
+        android:theme="@style/Theme.MathHeroes">
         <activity
-            android:name=".MainActivity"
+            android:name="com.mathheroes.safari.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +22,7 @@
 
             <meta-data
                 android:name="android.app.lib_name"
-                android:value="mathsafari" />
+                android:value="mathheroes" />
         </activity>
     </application>
 

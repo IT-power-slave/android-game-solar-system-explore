@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.mathsafari"
+    namespace = "com.mathheroes.safari"
     compileSdk {
         version = release(36) {
             minorApiLevel = 1
@@ -12,9 +12,9 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.mathsafari"
+        applicationId = "com.mathheroes.safari"
         minSdk = 30
-        targetSdk = 36
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 

@@ -1,4 +1,4 @@
-package com.example.mathsafari.data
+package com.mathheroes.safari.data
 
 data class Planet(
     val id: String,

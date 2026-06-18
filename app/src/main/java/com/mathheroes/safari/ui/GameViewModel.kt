@@ -1,8 +1,8 @@
-package com.example.mathsafari.ui
+package com.mathheroes.safari.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mathsafari.data.*
+import com.mathheroes.safari.data.*
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 

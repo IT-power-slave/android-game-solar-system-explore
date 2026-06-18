@@ -1,4 +1,4 @@
-package com.example.mathsafari.ui
+package com.mathheroes.safari.ui
 
 import android.webkit.JavascriptInterface
 

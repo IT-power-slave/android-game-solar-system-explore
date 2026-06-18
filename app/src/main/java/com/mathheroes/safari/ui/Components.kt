@@ -1,4 +1,4 @@
-package com.example.mathsafari.ui
+package com.mathheroes.safari.ui
 
 import androidx.compose.animation.*
 import androidx.compose.foundation.BorderStroke
@@ -22,12 +22,16 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.mathsafari.data.Badge
-import com.example.mathsafari.data.Planet
-import com.example.mathsafari.data.PlanetRepository
+import com.mathheroes.safari.data.Badge
+import com.mathheroes.safari.data.Planet
+import com.mathheroes.safari.data.PlanetRepository
+import com.mathheroes.safari.data.Question
+import com.mathheroes.safari.R
 
 @Composable
 fun HUDView(
@@ -78,7 +82,7 @@ fun HUDView(
             colors = ButtonDefaults.buttonColors(containerColor = Color.Red.copy(alpha = 0.7f)),
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp)
         ) {
-            Text("🏠 Menu", color = Color.White)
+            Text(stringResource(R.string.menu), color = Color.White)
         }
 
         Card(
@@ -111,7 +115,7 @@ fun MainMenuView(
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
-                text = "🚀 Odkrywcy\nUkładu Słonecznego",
+                text = stringResource(R.string.menu_title),
                 textAlign = androidx.compose.ui.text.style.TextAlign.Center,
                 fontSize = 40.sp,
                 fontWeight = FontWeight.Black,
@@ -120,23 +124,23 @@ fun MainMenuView(
             )
             Spacer(Modifier.height(8.dp))
             Text(
-                text = "Poznaj planety i zostań Mistrzem Kosmosu!",
+                text = stringResource(R.string.menu_subtitle),
                 color = Color(0xFFB4DCFF).copy(alpha = 0.75f),
                 fontWeight = FontWeight.SemiBold
             )
             Spacer(Modifier.height(32.dp))
             
-            MenuButton("🔭 Eksploruj Układ", Color(0xFF1565C0), onStartExplore)
+            MenuButton(stringResource(R.string.start_explore), Color(0xFF1565C0), onStartExplore)
             Spacer(Modifier.height(12.dp))
-            MenuButton("🎮 Quiz Planetarny", Color(0xFFFF8C00), onStartQuiz)
+            MenuButton(stringResource(R.string.start_quiz), Color(0xFFFF8C00), onStartQuiz)
 //            Spacer(Modifier.height(12.dp))
 //            MenuButton("🪐 Ucz się", Color(0xFF0D7377), onStartLineup)
             Spacer(Modifier.height(12.dp))
-            MenuButton("🏆 Moje Odznaki", Color(0xFF6A1B9A), onShowBadges)
+            MenuButton(stringResource(R.string.show_badges), Color(0xFF6A1B9A), onShowBadges)
             
             Spacer(Modifier.height(24.dp))
             Text(
-                text = "Twoje punkty: $totalPts ⭐",
+                text = stringResource(R.string.your_points, totalPts),
                 color = Color(0xFFFFD700),
                 fontWeight = FontWeight.ExtraBold
             )
@@ -185,7 +189,7 @@ fun InfoPanelView(planet: Planet, onClose: () -> Unit) {
                 Spacer(Modifier.height(12.dp))
                 Text(text = planet.desc, color = Color.White.copy(alpha = 0.9f), lineHeight = 20.sp)
                 Spacer(Modifier.height(16.dp))
-                Text(text = "📚 CIEKAWOSTKI", color = Color(0xFF4FC3F7), fontWeight = FontWeight.ExtraBold, fontSize = 12.sp)
+                Text(text = stringResource(R.string.fun_facts), color = Color(0xFF4FC3F7), fontWeight = FontWeight.ExtraBold, fontSize = 12.sp)
                 Spacer(Modifier.height(8.dp))
                 planet.facts.forEach { fact ->
                     FactItem(fact)
@@ -196,7 +200,7 @@ fun InfoPanelView(planet: Planet, onClose: () -> Unit) {
                     border = BorderStroke(1.dp, Color(0xFFFFA500).copy(alpha = 0.35f))
                 ) {
                     Column(modifier = Modifier.padding(12.dp)) {
-                        Text("🎉 WOW-FAKT!", color = Color(0xFFFFA500), fontWeight = FontWeight.Black, fontSize = 10.sp)
+                        Text(stringResource(R.string.wow_fact), color = Color(0xFFFFA500), fontWeight = FontWeight.Black, fontSize = 10.sp)
                         Text(text = planet.wow, color = Color(0xFFFFD700), fontSize = 14.sp)
                     }
                 }
@@ -231,13 +235,13 @@ fun BadgesView(earnedBadges: Set<String>, onBack: () -> Unit) {
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
-                text = "🏆 Moje Odznaki",
+                text = stringResource(R.string.badges_title),
                 fontSize = 32.sp,
                 fontWeight = FontWeight.Black,
                 color = Color(0xFFFFD700)
             )
             Text(
-                text = "Zdobyłeś/aś ${earnedBadges.size} z ${PlanetRepository.badges.size} odznak!",
+                text = stringResource(R.string.badges_summary, earnedBadges.size, PlanetRepository.badges.size),
                 color = Color(0xFFB4DCFF).copy(alpha = 0.65f)
             )
             Spacer(Modifier.height(24.dp))
@@ -255,7 +259,7 @@ fun BadgesView(earnedBadges: Set<String>, onBack: () -> Unit) {
             }
             
             Button(onClick = onBack, modifier = Modifier.padding(16.dp)) {
-                Text("🏠 Powrót do Menu")
+                Text(stringResource(R.string.back_to_menu))
             }
         }
     }
@@ -299,7 +303,7 @@ fun BadgeCard(badge: Badge, isEarned: Boolean) {
 
 @Composable
 fun QuizView(
-    questions: List<com.example.mathsafari.data.Question>,
+    questions: List<Question>,
     currentIndex: Int,
     score: Int,
     streak: Int,
@@ -352,7 +356,7 @@ fun QuizView(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "Pytanie ${currentIndex + 1} z ${questions.size}",
+                    text = stringResource(R.string.question_count, currentIndex + 1, questions.size),
                     color = Color(0xFFB4DCFF).copy(alpha = 0.8f),
                     fontWeight = FontWeight.Bold
                 )
@@ -437,7 +441,7 @@ fun QuizView(
             Spacer(Modifier.height(18.dp))
             if (showFeedback) {
                 Text(
-                    text = if (selectedIndex == currentQuestion.ans) "✅ Brawo!" else "❌ Nie tym razem…",
+                    text = if (selectedIndex == currentQuestion.ans) stringResource(R.string.well_done) else stringResource(R.string.not_this_time),
                     color = if (selectedIndex == currentQuestion.ans) Color(0xFF66BB6A) else Color(0xFFEF5350),
                     fontWeight = FontWeight.Bold
                 )
@@ -464,10 +468,10 @@ fun QuizView(
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Red.copy(alpha = 0.6f)),
                 shape = RoundedCornerShape(12.dp)
             ) {
-                Text("🏠 Powrót do Menu", color = Color.White)
+                Text(stringResource(R.string.back_to_menu), color = Color.White)
             }
             Text(
-                text = "Utracisz zdobyte teraz punkty jeśli wyjdziesz do Menu",
+                text = stringResource(R.string.lose_points_warning),
                 color = Color.White.copy(alpha = 0.5f),
                 fontSize = 11.sp,
                 modifier = Modifier.padding(top = 6.dp),
@@ -493,17 +497,17 @@ fun QuizResultsView(
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
-                text = "Wyniki Quizu!",
+                text = stringResource(R.string.quiz_results),
                 fontSize = 40.sp,
                 fontWeight = FontWeight.Black,
                 color = Color(0xFFFFD700)
             )
             Text(
                 text = when {
-                    score >= 9 -> "⭐⭐⭐ Mistrz Kosmosu!"
-                    score >= 7 -> "⭐⭐ Świetnie!"
-                    score >= 5 -> "⭐ Nieźle!"
-                    else -> "😅 Ćwicz dalej!"
+                    score >= 9 -> stringResource(R.string.level_master)
+                    score >= 7 -> stringResource(R.string.level_great)
+                    score >= 5 -> stringResource(R.string.level_not_bad)
+                    else -> stringResource(R.string.level_keep_practicing)
                 },
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
@@ -511,7 +515,7 @@ fun QuizResultsView(
             )
             Spacer(Modifier.height(16.dp))
             Text(text = "$score", fontSize = 100.sp, fontWeight = FontWeight.Black, color = Color.White)
-            Text(text = "pytań poprawnie na $total", color = Color(0xFFB4DCFF).copy(alpha = 0.65f))
+            Text(text = stringResource(R.string.correct_questions, score, total), color = Color(0xFFB4DCFF).copy(alpha = 0.65f))
             Spacer(Modifier.height(18.dp))
             Card(
                 colors = CardDefaults.cardColors(containerColor = Color(0xFFFFD700).copy(alpha = 0.12f)),
@@ -519,7 +523,7 @@ fun QuizResultsView(
                 shape = RoundedCornerShape(14.dp)
             ) {
                 Text(
-                    text = "+$earnedPts punktów zdobytych!",
+                    text = stringResource(R.string.points_earned, earnedPts),
                     modifier = Modifier.padding(horizontal = 24.dp, vertical = 11.dp),
                     color = Color(0xFFFFD700),
                     fontSize = 18.sp,
@@ -529,10 +533,10 @@ fun QuizResultsView(
             Spacer(Modifier.height(24.dp))
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                 Button(onClick = onRetry, colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFFD700))) {
-                    Text("🔄 Zagraj ponownie", color = Color.Black, fontWeight = FontWeight.Bold)
+                    Text(stringResource(R.string.play_again), color = Color.Black, fontWeight = FontWeight.Bold)
                 }
                 Button(onClick = onMenu, colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1565C0))) {
-                    Text("🏠 Menu", color = Color.White, fontWeight = FontWeight.Bold)
+                    Text(stringResource(R.string.menu), color = Color.White, fontWeight = FontWeight.Bold)
                 }
             }
         }
