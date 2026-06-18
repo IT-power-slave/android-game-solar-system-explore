@@ -5,13 +5,16 @@ import android.webkit.WebView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.mathsafari.data.DataStoreManager
 import com.example.mathsafari.data.PlanetRepository
 import com.example.mathsafari.ui.*
@@ -34,6 +37,8 @@ class MainActivity : ComponentActivity() {
             
             MaterialTheme {
                 Surface(modifier = Modifier.fillMaxSize(), color = Color(0xFF000510)) {
+                    var sceneLoaded by remember { mutableStateOf(false) }
+                    
                     Box(modifier = Modifier.fillMaxSize()) {
                         
                         // 3D Layer
@@ -43,30 +48,46 @@ class MainActivity : ComponentActivity() {
                             onWebViewReady = { webView = it },
                             bridge = GameBridge(
                                 onPlanetClick = { id ->
-                                    // Open details card ONLY when clicked
                                     val planet = PlanetRepository.planets.find { it.id == id }
                                     viewModel.selectPlanet(planet)
                                 },
                                 onPlanetFocus = { id ->
-                                    // When switching with arrows in Lineup mode, 
-                                    // we update internal logic but DON'T open the card automatically.
-                                    // To do this, we need a way to track the "active" planet 
-                                    // without necessarily "selecting" it (opening the UI).
-                                    // For now, I will just disable auto-opening here.
                                     if (mode != GameMode.LINEUP) {
                                         val planet = PlanetRepository.planets.find { it.id == id }
                                         viewModel.selectPlanet(planet)
                                     } else {
-                                        // In lineup, we clear selection so the card closes 
-                                        // until the user clicks the new focused planet.
                                         viewModel.selectPlanet(null)
                                     }
                                 },
                                 onSceneLoaded = {
-                                    // Handle loader if needed
+                                    sceneLoaded = true
                                 }
                             )
                         )
+                        
+                        // Loading screen
+                        if (!sceneLoaded) {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .background(Color(0xFF000510)),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                    CircularProgressIndicator(
+                                        color = Color(0xFF4FC3F7),
+                                        trackColor = Color.White.copy(alpha = 0.12f)
+                                    )
+                                    Spacer(Modifier.height(16.dp))
+                                    Text(
+                                        text = "Ładuję...",
+                                        color = Color(0xFFB4DCFF),
+                                        fontSize = 20.sp,
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                }
+                            }
+                        }
 
                         // UI Layer
                         if (mode != GameMode.MENU && mode != GameMode.BADGES && mode != GameMode.QUIZ) {
@@ -137,7 +158,8 @@ class MainActivity : ComponentActivity() {
                                         score = score,
                                         streak = streak,
                                         onAnswer = { correct, elapsed -> viewModel.answerQuestion(correct, elapsed) },
-                                        onFinish = { }
+                                        onFinish = { },
+                                        onMenu = { viewModel.setMode(GameMode.MENU) }
                                     )
                                 } else {
                                     val sessionEarnedPts by viewModel.sessionEarnedPts.collectAsState()

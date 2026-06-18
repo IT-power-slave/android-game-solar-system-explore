@@ -4,6 +4,8 @@ import androidx.compose.animation.*
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -166,14 +168,7 @@ fun InfoPanelView(planet: Planet, onClose: () -> Unit) {
         border = BorderStroke(1.dp, Color(0xFF64B4FF).copy(alpha = 0.25f))
     ) {
         Box(modifier = Modifier.padding(20.dp)) {
-            IconButton(
-                onClick = onClose,
-                modifier = Modifier.align(Alignment.TopEnd)
-            ) {
-                Icon(Icons.Default.Close, contentDescription = "Close", tint = Color.White)
-            }
-            
-            Column {
+            Column(modifier = Modifier.verticalScroll(rememberScrollState()).padding(top = 24.dp)) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(text = planet.emoji, fontSize = 44.sp)
                     Spacer(Modifier.width(12.dp))
@@ -205,6 +200,13 @@ fun InfoPanelView(planet: Planet, onClose: () -> Unit) {
                         Text(text = planet.wow, color = Color(0xFFFFD700), fontSize = 14.sp)
                     }
                 }
+            }
+
+            IconButton(
+                onClick = onClose,
+                modifier = Modifier.align(Alignment.TopEnd)
+            ) {
+                Icon(Icons.Default.Close, contentDescription = "Close", tint = Color.White)
             }
         }
     }
@@ -302,7 +304,8 @@ fun QuizView(
     score: Int,
     streak: Int,
     onAnswer: (Boolean, Double) -> Unit,
-    onFinish: () -> Unit
+    onFinish: () -> Unit,
+    onMenu: () -> Unit
 ) {
     if (questions.isEmpty()) return
 
@@ -454,6 +457,22 @@ fun QuizView(
                     modifier = Modifier.padding(top = 6.dp)
                 )
             }
+
+            Spacer(Modifier.height(32.dp))
+            Button(
+                onClick = onMenu,
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Red.copy(alpha = 0.6f)),
+                shape = RoundedCornerShape(12.dp)
+            ) {
+                Text("🏠 Powrót do Menu", color = Color.White)
+            }
+            Text(
+                text = "Utracisz zdobyte teraz punkty jeśli wyjdziesz do Menu",
+                color = Color.White.copy(alpha = 0.5f),
+                fontSize = 11.sp,
+                modifier = Modifier.padding(top = 6.dp),
+                textAlign = androidx.compose.ui.text.style.TextAlign.Center
+            )
         }
     }
 }

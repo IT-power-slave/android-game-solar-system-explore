@@ -118,7 +118,6 @@ class GameViewModel(private val dataStoreManager: DataStoreManager) : ViewModel(
                 if (_streak.value >= 2) pointsEarned += _streak.value * 2
                 
                 _sessionEarnedPts.value += pointsEarned
-                addPts(pointsEarned)
                 
                 if (_streak.value >= 3) awardBadge("streak3")
                 if (_streak.value >= 5) awardBadge("streak5")
@@ -128,6 +127,8 @@ class GameViewModel(private val dataStoreManager: DataStoreManager) : ViewModel(
 
             // Expand the time to see the correct answer to 5 seconds
             kotlinx.coroutines.delay(5000)
+
+            if (_mode.value != GameMode.QUIZ) return@launch
 
             if (_currentQuestionIndex.value + 1 < _quizQuestions.value.size) {
                 _currentQuestionIndex.value++
@@ -139,6 +140,7 @@ class GameViewModel(private val dataStoreManager: DataStoreManager) : ViewModel(
 
     private fun finishQuiz() {
         _quizFinished.value = true
+        addPts(_sessionEarnedPts.value)
         awardBadge("first_quiz")
         if (_quizScore.value == 10) awardBadge("perfect")
     }
