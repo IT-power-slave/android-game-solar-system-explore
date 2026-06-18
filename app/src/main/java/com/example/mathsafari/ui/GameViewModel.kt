@@ -38,6 +38,9 @@ class GameViewModel(private val dataStoreManager: DataStoreManager) : ViewModel(
     private val _streak = MutableStateFlow(0)
     val streak: StateFlow<Int> = _streak.asStateFlow()
 
+    private val _sessionEarnedPts = MutableStateFlow(0)
+    val sessionEarnedPts: StateFlow<Int> = _sessionEarnedPts.asStateFlow()
+
     fun setMode(newMode: GameMode) {
         _mode.value = newMode
         if (newMode == GameMode.QUIZ) {
@@ -94,6 +97,7 @@ class GameViewModel(private val dataStoreManager: DataStoreManager) : ViewModel(
         _currentQuestionIndex.value = 0
         _quizScore.value = 0
         _streak.value = 0
+        _sessionEarnedPts.value = 0
         _quizFinished.value = false
         viewModelScope.launch {
             dataStoreManager.incrementQuizN()
@@ -112,6 +116,8 @@ class GameViewModel(private val dataStoreManager: DataStoreManager) : ViewModel(
                     awardBadge("quick")
                 }
                 if (_streak.value >= 2) pointsEarned += _streak.value * 2
+                
+                _sessionEarnedPts.value += pointsEarned
                 addPts(pointsEarned)
                 
                 if (_streak.value >= 3) awardBadge("streak3")

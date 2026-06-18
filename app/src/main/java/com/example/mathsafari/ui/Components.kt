@@ -76,7 +76,7 @@ fun HUDView(
             colors = ButtonDefaults.buttonColors(containerColor = Color.Red.copy(alpha = 0.7f)),
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp)
         ) {
-            Text("← Menu", color = Color.White)
+            Text("🏠 Menu", color = Color.White)
         }
 
         Card(
@@ -127,8 +127,8 @@ fun MainMenuView(
             MenuButton("🔭 Eksploruj Układ", Color(0xFF1565C0), onStartExplore)
             Spacer(Modifier.height(12.dp))
             MenuButton("🎮 Quiz Planetarny", Color(0xFFFF8C00), onStartQuiz)
-            Spacer(Modifier.height(12.dp))
-            MenuButton("🪐 Ucz się", Color(0xFF0D7377), onStartLineup)
+//            Spacer(Modifier.height(12.dp))
+//            MenuButton("🪐 Ucz się", Color(0xFF0D7377), onStartLineup)
             Spacer(Modifier.height(12.dp))
             MenuButton("🏆 Moje Odznaki", Color(0xFF6A1B9A), onShowBadges)
             
@@ -253,7 +253,7 @@ fun BadgesView(earnedBadges: Set<String>, onBack: () -> Unit) {
             }
             
             Button(onClick = onBack, modifier = Modifier.padding(16.dp)) {
-                Text("← Powrót do Menu")
+                Text("🏠 Powrót do Menu")
             }
         }
     }

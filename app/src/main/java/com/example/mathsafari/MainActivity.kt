@@ -40,7 +40,7 @@ class MainActivity : ComponentActivity() {
                         WebGLContainer(
                             modifier = Modifier.fillMaxSize(),
                             mode = mode,
-                            onBridgeCreated = { webView = it },
+                            onWebViewReady = { webView = it },
                             bridge = GameBridge(
                                 onPlanetClick = { id ->
                                     // Open details card ONLY when clicked
@@ -77,7 +77,6 @@ class MainActivity : ComponentActivity() {
                                 progress = viewModel.getLevelProgress(),
                                 onMenuClick = { 
                                     viewModel.setMode(GameMode.MENU)
-                                    webView?.evaluateJavascript("setMode('explore')", null)
                                 }
                             )
                         }
@@ -88,12 +87,10 @@ class MainActivity : ComponentActivity() {
                                     totalPts = pts,
                                     onStartExplore = { 
                                         viewModel.setMode(GameMode.EXPLORE)
-                                        webView?.evaluateJavascript("setMode('explore')", null)
                                     },
                                     onStartQuiz = { viewModel.setMode(GameMode.QUIZ) },
                                     onStartLineup = { 
                                         viewModel.setMode(GameMode.LINEUP)
-                                        webView?.evaluateJavascript("setMode('lineup')", null)
                                     },
                                     onShowBadges = { viewModel.setMode(GameMode.BADGES) }
                                 )
@@ -143,10 +140,12 @@ class MainActivity : ComponentActivity() {
                                         onFinish = { }
                                     )
                                 } else {
+                                    val sessionEarnedPts by viewModel.sessionEarnedPts.collectAsState()
+                                    
                                     QuizResultsView(
                                         score = score,
                                         total = questions.size,
-                                        earnedPts = score * 10, // Approximation
+                                        earnedPts = sessionEarnedPts,
                                         onRetry = { viewModel.resetQuiz() },
                                         onMenu = { viewModel.setMode(GameMode.MENU) }
                                     )

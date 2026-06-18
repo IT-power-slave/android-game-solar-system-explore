@@ -3,9 +3,7 @@ package com.example.mathsafari.ui
 import android.annotation.SuppressLint
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.viewinterop.AndroidView
 
@@ -14,9 +12,10 @@ import androidx.compose.ui.viewinterop.AndroidView
 fun WebGLContainer(
     modifier: Modifier = Modifier,
     mode: GameMode,
-    onBridgeCreated: (WebView) -> Unit,
+    onWebViewReady: (WebView) -> Unit,
     bridge: GameBridge
 ) {
+    var webViewInstance by remember { mutableStateOf<WebView?>(null) }
     val webViewClient = remember { WebViewClient() }
 
     AndroidView(
@@ -32,16 +31,19 @@ fun WebGLContainer(
                 addJavascriptInterface(bridge, "GameBridge")
                 this.webViewClient = webViewClient
                 loadUrl("file:///android_asset/web/solar_system.html")
-                onBridgeCreated(this)
+                webViewInstance = this
+                onWebViewReady(this)
             }
         },
-        update = { webView ->
-            // Handle updates if needed
-        }
+        update = { }
     )
 
+    // Automatically sync mode changes to the JS engine
     LaunchedEffect(mode) {
-        // We'll call this from the ViewModel or Activity to ensure timing is right,
-        // but this is a placeholder for where mode changes could be pushed.
+        val jsMode = when(mode) {
+            GameMode.LINEUP -> "lineup"
+            else -> "explore"
+        }
+        webViewInstance?.evaluateJavascript("setMode('$jsMode')", null)
     }
 }
